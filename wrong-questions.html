@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GATE ECE | Wrong Questions</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="main-content container">
+  <h1 class="page-title">❌ Wrong Questions</h1>
+  <p class="page-description">Revise your mistakes and strengthen weak topics.</p>
+
+  <div class="card mb-2">
+    <strong id="wrongCount">0</strong>
+    <span class="muted"> questions to revise</span>
+  </div>
+
+  <div id="wrongList"></div>
+
+  <div id="empty" class="card" style="display:none">
+    <h3>No wrong questions recorded</h3>
+    <p class="muted mt-1">Incorrect practice and exam answers will appear here.</p>
+    <a href="practice.html" class="btn btn-primary mt-2">Practice Questions</a>
+  </div>
+</main>
+
+<script>
+function getWrong(){
+  try{return JSON.parse(localStorage.getItem("gateWrongQuestions")||"[]")}
+  catch{return []}
+}
+
+function renderWrong(){
+  const items=getWrong();
+  const list=document.getElementById("wrongList");
+  list.innerHTML="";
+  document.getElementById("wrongCount").textContent=items.length;
+  document.getElementById("empty").style.display=items.length?"none":"block";
+
+  items.forEach(q=>{
+    const card=document.createElement("article");
+    card.className="card mb-2";
+
+    const heading=document.createElement("h3");
+    heading.textContent=`${q.subject||"Subject"} · ${q.topic||"Topic"}`;
+
+    const meta=document.createElement("p");
+    meta.className="muted mt-1";
+    meta.textContent=`${q.year||""} · ${q.type||""} · ${q.marks||1} mark(s)`;
+
+    const question=document.createElement("p");
+    question.className="mt-1";
+    question.textContent=q.question;
+
+    const yourAnswer=document.createElement("p");
+    yourAnswer.className="mt-1";
+    yourAnswer.textContent="Your answer: "+
+      (Array.isArray(q.userAnswer)?q.userAnswer.join(", "):q.userAnswer??"Not recorded");
+
+    const correct=document.createElement("p");
+    correct.className="mt-1";
+    correct.textContent="Correct answer: "+
+      (Array.isArray(q.answer)?q.answer.join(", "):q.answer);
+
+    const explanation=document.createElement("p");
+    explanation.className="muted mt-1";
+    explanation.textContent="Explanation: "+(q.explanation||"Not provided.");
+
+    const remove=document.createElement("button");
+    remove.className="btn btn-success mt-1";
+    remove.textContent="Remove from Wrong List";
+    remove.addEventListener("click",()=>{
+      const updated=getWrong().filter(x=>String(x.id)!==String(q.id));
+      localStorage.setItem("gateWrongQuestions",JSON.stringify(updated));
+      renderWrong();
+    });
+
+    card.append(heading,meta,question,yourAnswer,correct,explanation,remove);
+    list.appendChild(card);
+  });
+}
+
+renderWrong();
+</script>
+</body>
+</html>
