@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATE ECE | Subjects</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .subject-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .subject-card {
+      cursor: pointer;
+    }
+
+    .topic-list {
+      margin: 12px 0 16px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .subject-card .btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .search-box {
+      margin-bottom: 20px;
+      max-width: 450px;
+    }
+
+    .subject-count {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .empty-message {
+      display: none;
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+    <div class="logo">GATE <span>ECE</span></div>
+
+    <nav>
+      <a class="nav-link" href="index.html">🏠 Dashboard</a>
+      <a class="nav-link active" href="subjects.html">📚 Subjects</a>
+      <a class="nav-link" href="practice.html">✍ Practice</a>
+      <a class="nav-link" href="exam.html">⏱ Mock Exam</a>
+      <a class="nav-link" href="bookmarks.html">🔖 Bookmarks</a>
+      <a class="nav-link" href="wrong-questions.html">❌ Wrong Questions</a>
+      <a class="nav-link" href="result.html">📊 Results</a>
+      <a class="nav-link" href="review.html">📝 Review</a>
+      <a class="nav-link" href="analytics.html">📈 Analytics</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+
+  <main class="main-content">
+
+    <div class="subject-header">
+      <div>
+        <h1 class="page-title">GATE ECE Subjects</h1>
+        <p class="page-description">
+          Select a subject to start topic-wise question practice.
+        </p>
+      </div>
+
+      <button class="btn" onclick="toggleTheme()">🌙 Theme</button>
+    </div>
+
+    <input
+      type="search"
+      id="searchSubject"
+      class="form-control search-box"
+      placeholder="Search subjects..."
+      oninput="filterSubjects()"
+    >
+
+    <p class="subject-count">
+      Showing <span id="subjectCount">10</span> subjects
+    </p>
+
+    <section class="subject-grid" id="subjectGrid">
+
+      <!-- 1 -->
+
+      <article class="subject-card" data-name="engineering mathematics">
+        <span class="subject-number">SUBJECT 01</span>
+        <h3>Engineering Mathematics</h3>
+        <p>Mathematical foundations for ECE.</p>
+        <ul class="topic-list">
+          <li>Linear Algebra</li>
+          <li>Calculus</li>
+          <li>Differential Equations</li>
+          <li>Probability and Statistics</li>
+          <li>Complex Variables</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Engineering%20Mathematics">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 2 -->
+
+      <article class="subject-card" data-name="network theory">
+        <span class="subject-number">SUBJECT 02</span>
+        <h3>Network Theory</h3>
+        <p>Electrical network analysis and circuits.</p>
+        <ul class="topic-list">
+          <li>KCL and KVL</li>
+          <li>Network Theorems</li>
+          <li>Transient Analysis</li>
+          <li>AC Circuit Analysis</li>
+          <li>Two-Port Networks</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Network%20Theory">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 3 -->
+
+      <article class="subject-card" data-name="signals and systems">
+        <span class="subject-number">SUBJECT 03</span>
+        <h3>Signals and Systems</h3>
+        <p>Analysis of continuous and discrete signals.</p>
+        <ul class="topic-list">
+          <li>Signal Classification</li>
+          <li>Fourier Series and Transform</li>
+          <li>Laplace Transform</li>
+          <li>Z-Transform</li>
+          <li>Sampling and LTI Systems</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Signals%20and%20Systems">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 4 -->
+
+      <article class="subject-card" data-name="electronic devices">
+        <span class="subject-number">SUBJECT 04</span>
+        <h3>Electronic Devices</h3>
+        <p>Semiconductor devices and their operation.</p>
+        <ul class="topic-list">
+          <li>Semiconductor Physics</li>
+          <li>PN Junction Diodes</li>
+          <li>BJT</li>
+          <li>MOSFET</li>
+          <li>Optoelectronic Devices</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Electronic%20Devices">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 5 -->
+
+      <article class="subject-card" data-name="analog circuits">
+        <span class="subject-number">SUBJECT 05</span>
+        <h3>Analog Circuits</h3>
+        <p>Analog electronic circuit design and analysis.</p>
+        <ul class="topic-list">
+          <li>Diode Circuits</li>
+          <li>BJT and MOS Amplifiers</li>
+          <li>Frequency Response</li>
+          <li>Operational Amplifiers</li>
+          <li>Oscillators and Feedback</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Analog%20Circuits">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 6 -->
+
+      <article class="subject-card" data-name="digital circuits">
+        <span class="subject-number">SUBJECT 06</span>
+        <h3>Digital Circuits</h3>
+        <p>Digital logic and system design.</p>
+        <ul class="topic-list">
+          <li>Boolean Algebra</li>
+          <li>Combinational Circuits</li>
+          <li>Sequential Circuits</li>
+          <li>Number Systems</li>
+          <li>Data Converters</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Digital%20Circuits">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 7 -->
+
+      <article class="subject-card" data-name="control systems">
+        <span class="subject-number">SUBJECT 07</span>
+        <h3>Control Systems</h3>
+        <p>System modelling and stability analysis.</p>
+        <ul class="topic-list">
+          <li>Transfer Functions</li>
+          <li>Block Diagram Reduction</li>
+          <li>Time Response</li>
+          <li>Root Locus</li>
+          <li>Bode and Nyquist Plots</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Control%20Systems">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 8 -->
+
+      <article class="subject-card" data-name="communications">
+        <span class="subject-number">SUBJECT 08</span>
+        <h3>Communications</h3>
+        <p>Analog and digital communication systems.</p>
+        <ul class="topic-list">
+          <li>Amplitude Modulation</li>
+          <li>Frequency Modulation</li>
+          <li>Noise Analysis</li>
+          <li>Digital Modulation</li>
+          <li>Information Theory</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Communications">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 9 -->
+
+      <article class="subject-card" data-name="electromagnetic theory">
+        <span class="subject-number">SUBJECT 09</span>
+        <h3>Electromagnetic Theory</h3>
+        <p>Electromagnetic fields and wave propagation.</p>
+        <ul class="topic-list">
+          <li>Electrostatics</li>
+          <li>Magnetostatics</li>
+          <li>Maxwell's Equations</li>
+          <li>Plane Waves</li>
+          <li>Transmission Lines and Waveguides</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=Electromagnetic%20Theory">
+          Practice Questions
+        </a>
+      </article>
+
+      <!-- 10 -->
+
+      <article class="subject-card" data-name="general aptitude">
+        <span class="subject-number">SUBJECT 10</span>
+        <h3>General Aptitude</h3>
+        <p>Verbal and numerical problem-solving skills.</p>
+        <ul class="topic-list">
+          <li>Verbal Aptitude</li>
+          <li>Numerical Aptitude</li>
+          <li>Analytical Aptitude</li>
+          <li>Spatial Aptitude</li>
+        </ul>
+        <a class="btn btn-primary" href="practice.html?subject=General%20Aptitude">
+          Practice Questions
+        </a>
+      </article>
+
+    </section>
+
+    <div class="empty-message" id="emptyMessage">
+      No matching subject found.
+    </div>
+
+    <footer class="mt-2 text-muted">
+      GATE ECE Preparation Platform
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  function filterSubjects() {
+    const search = document
+      .getElementById("searchSubject")
+      .value.toLowerCase();
+
+    const cards = document.querySelectorAll(".subject-card");
+    let visible = 0;
+
+    cards.forEach(card => {
+      const name = card.dataset.name;
+      const show = name.includes(search);
+
+      card.style.display = show ? "block" : "none";
+
+      if (show) visible++;
+    });
+
+    document.getElementById("subjectCount").textContent = visible;
+    document.getElementById("emptyMessage").style.display =
+      visible === 0 ? "block" : "none";
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle("light");
+
+    const theme = document.body.classList.contains("light")
+      ? "light"
+      : "dark";
+
+    localStorage.setItem("gateTheme", theme);
+  }
+
+  function loadTheme() {
+    if (localStorage.getItem("gateTheme") === "light") {
+      document.body.classList.add("light");
+    }
+  }
+
+  loadTheme();
+</script>
+
+</body>
+</html>
