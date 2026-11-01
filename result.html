@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GATE ECE | Exam Result</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.result-number{font-size:27px;font-weight:bold;margin-top:8px}
+@media(max-width:700px){.result-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<main class="main-content container">
+  <h1 class="page-title">Examination Result</h1>
+  <p class="page-description">Your latest mock examination performance.</p>
+
+  <section id="resultContent" style="display:none">
+    <div class="card">
+      <p class="muted">Your Total Score</p>
+      <div class="result-number" id="score">0</div>
+      <p id="examDate" class="muted"></p>
+    </div>
+
+    <div class="result-grid mt-2">
+      <div class="card"><p class="muted">Correct</p><div class="result-number" id="correct">0</div></div>
+      <div class="card"><p class="muted">Wrong</p><div class="result-number" id="wrong">0</div></div>
+      <div class="card"><p class="muted">Unattempted</p><div class="result-number" id="unattempted">0</div></div>
+      <div class="card"><p class="muted">Total Questions</p><div class="result-number" id="total">0</div></div>
+    </div>
+
+    <div class="card mt-2">
+      <h3>Attempt Summary</h3>
+      <p id="attemptSummary" class="mt-1"></p>
+      <div class="progress mt-1"><div id="attemptBar" class="progress-bar"></div></div>
+      <p class="muted mt-1">Attempt rate</p>
+    </div>
+
+    <div class="actions mt-2">
+      <a href="review.html" class="btn btn-primary">Review Answers</a>
+      <a href="exam.html" class="btn">New Exam</a>
+      <a href="analytics.html" class="btn">Analytics</a>
+    </div>
+  </section>
+
+  <section id="noResult" class="card">
+    <h2>No examination result found</h2>
+    <p class="muted mt-1">Complete a mock examination to see your score here.</p>
+    <a href="exam.html" class="btn btn-primary mt-2">Start Examination</a>
+  </section>
+</main>
+
+<script>
+const result=JSON.parse(localStorage.getItem("gateLastResult")||"null");
+
+if(result){
+  document.getElementById("resultContent").style.display="block";
+  document.getElementById("noResult").style.display="none";
+
+  document.getElementById("score").textContent=result.score;
+  document.getElementById("correct").textContent=result.correct;
+  document.getElementById("wrong").textContent=result.wrong;
+  document.getElementById("unattempted").textContent=result.unattempted;
+  document.getElementById("total").textContent=result.totalQuestions;
+
+  document.getElementById("examDate").textContent=
+    "Completed: "+new Date(result.date).toLocaleString();
+
+  const attempted=result.correct+result.wrong;
+  const rate=result.totalQuestions
+    ?Math.round(attempted/result.totalQuestions*100):0;
+
+  document.getElementById("attemptSummary").textContent=
+    `${attempted} attempted out of ${result.totalQuestions} questions.`;
+
+  document.getElementById("attemptBar").style.width=rate+"%";
+}
+</script>
+</body>
+</html>
