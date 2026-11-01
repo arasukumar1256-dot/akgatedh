@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GATE ECE | Bookmarks</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="main-content container">
+  <h1 class="page-title">🔖 Bookmarked Questions</h1>
+  <p class="page-description">Your saved questions for revision.</p>
+
+  <div class="card mb-2">
+    <strong id="bookmarkCount">0</strong>
+    <span class="muted"> saved questions</span>
+  </div>
+
+  <div id="bookmarkList"></div>
+
+  <div id="empty" class="card" style="display:none">
+    <h3>No bookmarks yet</h3>
+    <p class="muted mt-1">Open Practice and tap ☆ Bookmark to save questions.</p>
+    <a href="practice.html" class="btn btn-primary mt-2">Go to Practice</a>
+  </div>
+</main>
+
+<script>
+function getBookmarks(){
+  try{return JSON.parse(localStorage.getItem("gateBookmarks")||"[]")}
+  catch{return []}
+}
+
+function renderBookmarks(){
+  const items=getBookmarks();
+  const list=document.getElementById("bookmarkList");
+  list.innerHTML="";
+  document.getElementById("bookmarkCount").textContent=items.length;
+  document.getElementById("empty").style.display=items.length?"none":"block";
+
+  items.forEach(q=>{
+    const card=document.createElement("article");
+    card.className="card mb-2";
+
+    const title=document.createElement("h3");
+    title.textContent=`${q.subject} · ${q.topic}`;
+
+    const meta=document.createElement("p");
+    meta.className="muted mt-1";
+    meta.textContent=`${q.year||"Year not specified"} · ${q.type} · ${q.marks||1} mark(s)`;
+
+    const question=document.createElement("p");
+    question.className="mt-1";
+    question.textContent=q.question;
+
+    const answer=document.createElement("p");
+    answer.className="muted mt-1";
+    answer.textContent="Answer: "+(Array.isArray(q.answer)?q.answer.join(", "):q.answer);
+
+    const remove=document.createElement("button");
+    remove.className="btn btn-danger mt-1";
+    remove.textContent="Remove Bookmark";
+    remove.addEventListener("click",()=>{
+      const updated=getBookmarks().filter(x=>String(x.id)!==String(q.id));
+      localStorage.setItem("gateBookmarks",JSON.stringify(updated));
+      renderBookmarks();
+    });
+
+    card.append(title,meta,question,answer,remove);
+    list.appendChild(card);
+  });
+}
+
+renderBookmarks();
+</script>
+</body>
+</html>
