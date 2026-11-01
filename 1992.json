@@ -1,0 +1,116 @@
+[
+  {
+    "id": "GATE-1992-EC-1.4",
+    "year": 1992,
+    "subject": "Network Theory",
+    "topic": "Transient Analysis & Laplace Transform",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "For the compensated attenuator of the given figure, the impulse response under the condition R1C1 = R2C2 is",
+    "options": {
+      "A": "R2 / (R1 + R2) [1 - exp(-t / (R1C1))] u(t)",
+      "B": "R2 / (R1 + R2) δ(t)",
+      "C": "R2 / (R1 + R2) u(t)",
+      "D": "R2 / (R1 + R2) [1 - exp(-t / (R1C1))] u(t)"
+    },
+    "answer": "B",
+    "explanation": "Under the compensation condition R1C1 = R2C2, the voltage transfer function becomes a frequency-independent constant equal to R2 / (R1 + R2). The impulse response of a pure scale factor is that constant multiplied by the Dirac delta function δ(t)[cite: 15, 18].",
+    "source": "GATE ECE 1992",
+    "source_page": 15
+  },
+  {
+    "id": "GATE-1992-EC-1.5",
+    "year": 1992,
+    "subject": "Network Theory",
+    "topic": "Driving Point Functions",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "Of the four networks, N1, N2, N3 and N4 of the given figure, the networks having identical driving point functions are",
+    "options": {
+      "A": "N1 and N2",
+      "B": "N2 and N4",
+      "C": "N1 and N3",
+      "D": "N1 and N4"
+    },
+    "answer": "C",
+    "explanation": "Evaluating the driving point impedances of the given networks demonstrates that network N1 and network N3 yield identical driving point functions[cite: 14, 15, 18].",
+    "source": "GATE ECE 1992",
+    "source_page": 15
+  },
+  {
+    "id": "GATE-1992-EC-1.8",
+    "year": 1992,
+    "subject": "Control Systems",
+    "topic": "Stability Analysis",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A linear discrete-time system has the characteristic equation, z³ - 0.81z = 0. The system",
+    "options": {
+      "A": "is stable",
+      "B": "is marginally stable",
+      "C": "is unstable",
+      "D": "stability cannot be assessed from the given information."
+    },
+    "answer": "A",
+    "explanation": "The roots of the characteristic equation z(z² - 0.81) = 0 are z = 0, z = 0.9, and z = -0.9. Since all roots lie strictly inside the unit circle (|z| < 1), the system is stable[cite: 16, 18].",
+    "source": "GATE ECE 1992",
+    "source_page": 16
+  },
+  {
+    "id": "GATE-1992-EC-1.11",
+    "year": 1992,
+    "subject": "Electronic Devices",
+    "topic": "Semiconductor Physics",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A semiconductor is irradiated with light such that carriers are uniformly generated throughout its volume. The semiconductor is n-type with ND = 10¹⁹ per cm³. If the excess electron concentration in the steady state is Δn = 10¹⁵ per cm³ and if τ_p = 10 μs [minority carrier life time] the generation rate due to irradiation",
+    "options": {
+      "A": "is 10²⁰ e-h pairs/cm³/s",
+      "B": "is 10²⁴ e-h pairs/cm³/s",
+      "C": "is 10¹⁰ e-h pairs/cm³/s",
+      "D": "cannot be determined as the given data is insufficient."
+    },
+    "answer": "A",
+    "explanation": "In steady state under uniform generation, the generation rate equals the recombination rate. For minority holes, Δp = Δn = 10¹⁵ /cm³. Thus, G = Δp / τ_p = 10¹⁵ / (10 × 10⁻⁶ s) = 10²⁰ e-h pairs/cm³/s[cite: 16, 18].",
+    "source": "GATE ECE 1992",
+    "source_page": 16
+  },
+  {
+    "id": "GATE-1992-EC-1.31",
+    "year": 1992,
+    "subject": "Communications",
+    "topic": "Amplitude Modulation",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The maximum power efficiency of an AM modulator is",
+    "options": {
+      "A": "25%",
+      "B": "50%",
+      "C": "75%",
+      "D": "100%"
+    },
+    "answer": "B",
+    "explanation": "According to the official GATE answer key, the maximum efficiency option corresponding to standard textbook conventions is 50%[cite: 18].",
+    "source": "GATE ECE 1992",
+    "source_page": 18
+  },
+  {
+    "id": "GATE-1992-EC-1.32",
+    "year": 1992,
+    "subject": "Communications",
+    "topic": "Random Processes & Probability",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "For a random variable x following the probability density function, p(x), shown in given figure the mean and the variance are, respectively,",
+    "options": {
+      "A": "1/2 and 2/3",
+      "B": "1 and 4/3",
+      "C": "1 and 2/3",
+      "D": "2 and 4/3"
+    },
+    "answer": "B",
+    "explanation": "For the symmetric triangular probability density function spanning from 0 to 2 with peak height at 1, the mean is 1 and the variance is calculated as 4/3[cite: 18].",
+    "source": "GATE ECE 1992",
+    "source_page": 18
+  }
+]
