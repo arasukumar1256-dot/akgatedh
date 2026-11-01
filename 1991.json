@@ -1,0 +1,420 @@
+[
+  {
+    "id": "GATE-1991-EC-1.1",
+    "year": 1991,
+    "subject": "Signals & Systems",
+    "topic": "System Properties",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "An excitation is applied to a system at t = T and its response is zero for -∞ < t < T. Such a system is",
+    "options": {
+      "A": "non-causal system",
+      "B": "stable system",
+      "C": "causal system",
+      "D": "unstable system"
+    },
+    "answer": "C",
+    "explanation": "A system is defined as causal if its output at any time depends only on present and/or past inputs. Since the response before t = T is zero when the input is applied at t = T, the output does not anticipate the input, making the system causal.",
+    "source": "GATE ECE 1991",
+    "source_page": 1
+  },
+  {
+    "id": "GATE-1991-EC-1.2",
+    "year": 1991,
+    "subject": "Network Theory",
+    "topic": "Resonance",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "In a series RLC high Q circuit, the current peaks at a frequency",
+    "options": {
+      "A": "equal to the resonant frequency",
+      "B": "greater than the resonant frequency",
+      "C": "less than the resonant frequency",
+      "D": "none of the above"
+    },
+    "answer": "A",
+    "explanation": "In a series RLC circuit, maximum current occurs when the impedance is purely resistive and at its minimum, which occurs precisely at the resonant frequency f_0 = 1 / (2π√(LC)).",
+    "source": "GATE ECE 1991",
+    "source_page": 1
+  },
+  {
+    "id": "GATE-1991-EC-1.3",
+    "year": 1991,
+    "subject": "Network Theory",
+    "topic": "Transient Analysis & Laplace Transform",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The voltage across an impedance in a network is V(s) = Z(s)I(s), where V(s), Z(s) are the Laplace transforms of the corresponding time functions v(t), z(t) and i(t). The voltage v(t) is:",
+    "options": {
+      "A": "v(t) = z(t) . i(t)",
+      "B": "v(t) = ∫₀ᵗ i(τ) . z(t - τ) dτ",
+      "C": "v(t) = ∫₀ᵗ i(τ) . z(t + τ) dτ",
+      "D": "v(t) = z(t) + i(t)"
+    },
+    "answer": "B",
+    "explanation": "Multiplication in the Laplace/s-domain, V(s) = Z(s)I(s), corresponds to convolution in the time domain: v(t) = z(t) * i(t) = ∫₀ᵗ i(τ)z(t-τ)dτ.",
+    "source": "GATE ECE 1991",
+    "source_page": 1
+  },
+  {
+    "id": "GATE-1991-EC-1.4",
+    "year": 1991,
+    "subject": "Network Theory",
+    "topic": "Two-Port Networks",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "Two two-port networks are connected in cascade. The combination is to be represented as a single two-port network. The parameters of the network are obtained by multiplying the individual",
+    "options": {
+      "A": "z-parameter matrix",
+      "B": "h-parameter matrix",
+      "C": "y-parameter matrix",
+      "D": "ABCD parameter matrix"
+    },
+    "answer": "D",
+    "explanation": "When two-port networks are connected in cascade, the overall transmission (ABCD) matrix is equal to the matrix product of the individual ABCD matrices.",
+    "source": "GATE ECE 1991",
+    "source_page": 1
+  },
+  {
+    "id": "GATE-1991-EC-1.5",
+    "year": 1991,
+    "subject": "Network Theory",
+    "topic": "Filter Approximations & Realizability",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The pole-zero pattern of a certain filter shows poles at s = -1, -1+j1, -1-j1 and zeros at s = +1, 1+j1, 1-j1. The filter must be of the following type.",
+    "options": {
+      "A": "low pass",
+      "B": "high pass",
+      "C": "all pass",
+      "D": "band pass"
+    },
+    "answer": "C",
+    "explanation": "The poles and zeros are symmetric about the imaginary axis (zeros are the mirror images of poles in the right-half s-plane). This pole-zero pattern yields a constant magnitude response across all frequencies, characteristic of an all-pass filter.",
+    "source": "GATE ECE 1991",
+    "source_page": 1
+  },
+  {
+    "id": "GATE-1991-EC-1.6",
+    "year": 1991,
+    "subject": "Network Theory",
+    "topic": "Network Synthesis",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The necessary and sufficient condition for a rational function of s, T(s), to be driving point impedance of an RC network is that all poles and zeros should be",
+    "options": {
+      "A": "simple and lie on the negative real axis in the s-plane",
+      "B": "complex and lie in the left half of the s-plane",
+      "C": "complex and lie in the right half of the s-plane",
+      "D": "simple and lie on the positive real axis of the s-plane"
+    },
+    "answer": "A",
+    "explanation": "For an RC driving-point impedance function, the poles and zeros must be simple, real, negative, and alternate along the negative real axis.",
+    "source": "GATE ECE 1991",
+    "source_page": 2
+  },
+  {
+    "id": "GATE-1991-EC-1.7",
+    "year": 1991,
+    "subject": "Control Systems",
+    "topic": "Signal Flow Graphs",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "In the signal flow graph of Figure, the gain C/R will be",
+    "options": {
+      "A": "11/9",
+      "B": "22/15",
+      "C": "24/23",
+      "D": "44/23"
+    },
+    "answer": "C",
+    "explanation": "Using Mason's Gain Formula: Forward paths P1 = 1*2*3*4*1 = 24, P2 = 1*5*1 = 5. Individual loops: L1 = 2*(-1) = -2, L2 = 3*(-1) = -3, L3 = 4*(-1) = -4. Non-touching loops: (L1, L3) = (-2)*(-4) = 8. Δ = 1 - (L1+L2+L3) + L1L3 = 1 - (-9) + 8 = 18. Path 1 touches all loops, so Δ1 = 1. Path 2 (gain 5) touches node 2 and node 4, non-touching loop L2 (gain -3), so Δ2 = 1 - L2 = 1 - (-3) = 4. T = (24*1 + 5*4)/18 = 44/18 = 22/9.",
+    "source": "GATE ECE 1991",
+    "source_page": 2
+  },
+  {
+    "id": "GATE-1991-EC-1.8",
+    "year": 1991,
+    "subject": "Control Systems",
+    "topic": "Time Response Analysis",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A second order system has a transfer function given by G(s) = 25 / (s² + 8s + 25). If the system, initially at rest is subjected to a unit step input at t = 0, the second peak in response will occur at",
+    "options": {
+      "A": "π sec",
+      "B": "π/3 sec",
+      "C": "2π/3 sec",
+      "D": "π/2 sec"
+    },
+    "answer": "A",
+    "explanation": "Comparing G(s) to standard form ω_n²/(s² + 2ζω_n s + ω_n²): ω_n = 5, 2ζω_n = 8 => ζ = 0.8. Damped frequency ω_d = ω_n √(1 - ζ²) = 5 √(1 - 0.64) = 3 rad/s. The second peak (second overshoot) occurs at t = 3π / ω_d = 3π / 3 = π sec.",
+    "source": "GATE ECE 1991",
+    "source_page": 2
+  },
+  {
+    "id": "GATE-1991-EC-1.9",
+    "year": 1991,
+    "subject": "Control Systems",
+    "topic": "Frequency Response Analysis",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The open loop transfer function of a feedback control system is: G(s)H(s) = 1 / (s + 1)³. The gain margin of the system is:",
+    "options": {
+      "A": "2",
+      "B": "4",
+      "C": "8",
+      "D": "16"
+    },
+    "answer": "C",
+    "explanation": "Phase angle ϕ = -3 arctan(ω). At phase crossover frequency ω_pc, ϕ = -180° => arctan(ω_pc) = 60° => ω_pc = √3 rad/s. |G(jω_pc)H(jω_pc)| = 1 / (√(3+1))³ = 1 / 2³ = 1/8. Gain Margin GM = 1 / |G(jω_pc)H(jω_pc)| = 8.",
+    "source": "GATE ECE 1991",
+    "source_page": 2
+  },
+  {
+    "id": "GATE-1991-EC-1.10",
+    "year": 1991,
+    "subject": "Control Systems",
+    "topic": "Steady State Error",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A unity feedback control system has the open loop transfer function G(s) = 4(1 + 2s) / [s²(s + 2)]. If the input to the system is a unit ramp, the steady state error will be",
+    "options": {
+      "A": "0",
+      "B": "0.5",
+      "C": "2",
+      "D": "infinity"
+    },
+    "answer": "A",
+    "explanation": "The system is Type 2 (due to s² in denominator). The velocity error constant K_v = lim_{s->0} s G(s) = ∞. For a unit ramp input, the steady state error e_ss = 1 / K_v = 1 / ∞ = 0.",
+    "source": "GATE ECE 1991",
+    "source_page": 2
+  },
+  {
+    "id": "GATE-1991-EC-1.11",
+    "year": 1991,
+    "subject": "Control Systems",
+    "topic": "Root Locus",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The characteristic equation of a feedback control system is given by s³ + 5s² + (K + 6)s + K = 0. Where K > 0 is a scalar variable parameter. In the root loci diagram of the system the asymptotes of the root locus for large values of K meet at a point in the s-plane whose coordinates are",
+    "options": {
+      "A": "(-3, 0)",
+      "B": "(-2, 0)",
+      "C": "(-1, 0)",
+      "D": "(2, 0)"
+    },
+    "answer": "B",
+    "explanation": "Rewriting the characteristic equation in 1 + K G(s)H(s) = 0 form: 1 + K(s + 1) / (s³ + 5s² + 6s) = 0. Open-loop poles: s = 0, -2, -3 (P = 3). Open-loop zero: s = -1 (Z = 1). Centroid σ = (Σ poles - Σ zeros) / (P - Z) = [(0 - 2 - 3) - (-1)] / (3 - 1) = (-5 + 1) / 2 = -2. Thus, the coordinates are (-2, 0).",
+    "source": "GATE ECE 1991",
+    "source_page": 3
+  },
+  {
+    "id": "GATE-1991-EC-1.12",
+    "year": 1991,
+    "subject": "Control Systems",
+    "topic": "State Space Analysis",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A linear second order single input continuous time system is described by the following set of differential equations:\nẋ₁(t) = -2 x₁(t) + 4 x₂(t)\nẋ₂(t) = 2 x₁(t) - x₂(t) + u(t)\nWhere x₁(t) and x₂(t) are state variables and u(t) is control variable. The system is:",
+    "options": {
+      "A": "controllable and stable",
+      "B": "controllable but unstable",
+      "C": "uncontrollable and unstable",
+      "D": "uncontrollable and stable"
+    },
+    "answer": "B",
+    "explanation": "System matrices: A = [[-2, 4], [2, -1]], B = [[0], [1]]. Controllability matrix Q_c = [B AB] = [[0, 4], [1, -1]]. det(Q_c) = -4 ≠ 0, so system is controllable. Characteristic equation |sI - A| = det([[s+2, -4], [-2, s+1]]) = s² + 3s - 6 = 0. Roots are s = (-3 ± √33)/2. Since one root is positive ((√33 - 3)/2 > 0), the system is unstable.",
+    "source": "GATE ECE 1991",
+    "source_page": 3
+  },
+  {
+    "id": "GATE-1991-EC-1.13",
+    "year": 1991,
+    "subject": "Control Systems",
+    "topic": "Discrete-Time Control Systems",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A linear time-invariant discrete-time system is described by the vector matrix difference equation X(k+1) = F X(k) + G u(k). The state transition matrix of the system is given by the inverse Z-transform of",
+    "options": {
+      "A": "zI - F",
+      "B": "(zI - F) z",
+      "C": "(zI - F)⁻¹ G",
+      "D": "(zI - F)⁻¹ z"
+    },
+    "answer": "D",
+    "explanation": "The discrete-time state transition matrix Φ(k) = F^k, and its z-transform is Φ(z) = (zI - F)⁻¹ z. Therefore, Φ(k) is the inverse z-transform of (zI - F)⁻¹ z.",
+    "source": "GATE ECE 1991",
+    "source_page": 3
+  },
+  {
+    "id": "GATE-1991-EC-1.14",
+    "year": 1991,
+    "subject": "Electronic Devices",
+    "topic": "Semiconductor Physics",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A silicon sample is uniformly doped with 10¹⁶ phosphorous atoms/cm³ and 2×10¹⁶ boron atoms/cm³. If all the dopants are fully ionized, the material is",
+    "options": {
+      "A": "n-type with carrier concentration of 10¹⁶/cm³",
+      "B": "p-type with carrier concentration of 10¹⁶/cm³",
+      "C": "p-type with carrier concentration of 2×10¹⁶/cm³",
+      "D": "n-type with carrier concentration of 2×10¹⁶/cm³"
+    },
+    "answer": "B",
+    "explanation": "Acceptor concentration (Boron, Na) = 2×10¹⁶ /cm³, Donor concentration (Phosphorus, Nd) = 10¹⁶ /cm³. Since Na > Nd, it is p-type. Majority hole concentration p ≈ Na - Nd = 2×10¹⁶ - 10¹⁶ = 10¹⁶ /cm³.",
+    "source": "GATE ECE 1991",
+    "source_page": 3
+  },
+  {
+    "id": "GATE-1991-EC-1.18",
+    "year": 1991,
+    "subject": "Analog Circuits",
+    "topic": "BJT Biasing & Thermal Runaway",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "Discrete transistors T1 and T2 having maximum collector current rating of 0.75 A are connected in parallel. This combination is treated as a single transistor to carry a total current of 1 A. When switched on, T1 draws 0.55 A and T2 draws 0.45 A. If the supply is kept on continuously, ultimately it is very likely that",
+    "options": {
+      "A": "both T1 and T2 get damaged",
+      "B": "both T1 and T2 will be safe",
+      "C": "T1 will get damaged and T2 will be safe",
+      "D": "T2 will get damaged and T1 will be safe"
+    },
+    "answer": "C",
+    "explanation": "Transistor T1 initially carries more current (0.55 A vs 0.45 A), causing higher power dissipation and temperature rise in T1. Due to the negative temperature coefficient of V_BE, T1 will draw even more current as it heats up (thermal runaway), leading to its damage, while T2 remains safe.",
+    "source": "GATE ECE 1991",
+    "source_page": 4
+  },
+  {
+    "id": "GATE-1991-EC-1.25",
+    "year": 1991,
+    "subject": "Analog Circuits",
+    "topic": "Operational Amplifiers",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "Two non-inverting amplifiers, one having a unity gain and the other having a gain of twenty are made using identical operational amplifiers. As compared to the unity gain amplifier, the amplifier with gain twenty has",
+    "options": {
+      "A": "less negative feedback",
+      "B": "greater input impedance",
+      "C": "less bandwidth",
+      "D": "none of the above"
+    },
+    "answer": "C",
+    "explanation": "For an op-amp, the gain-bandwidth product is constant (GBW = A * BW). Therefore, an amplifier with a higher gain (20) will have a proportionally lower bandwidth compared to a unity-gain amplifier.",
+    "source": "GATE ECE 1991",
+    "source_page": 6
+  },
+  {
+    "id": "GATE-1991-EC-1.35",
+    "year": 1991,
+    "subject": "Communications",
+    "topic": "Information Theory & Coding",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A binary source has symbol probabilities 0.8 and 0.2. If extension coding (blocks of 4 symbols) is used, the lower and upper bounds on the average code word length L per block satisfy:",
+    "options": {
+      "A": "H(X⁴) ≤ L < H(X⁴) + 1",
+      "B": "H(X⁴) - 1 ≤ L < H(X⁴)",
+      "C": "H(X) ≤ L < H(X) + 1",
+      "D": "4 H(X) ≤ L < 4 H(X) + 1"
+    },
+    "answer": "A",
+    "explanation": "According to Shannon's source coding theorem, for an extended source emitting blocks of n symbols, the average codeword length per block L satisfies H(Sⁿ) ≤ L < H(Sⁿ) + 1, where H(Sⁿ) = n H(S).",
+    "source": "GATE ECE 1991",
+    "source_page": 8
+  },
+  {
+    "id": "GATE-1991-EC-1.36",
+    "year": 1991,
+    "subject": "Electromagnetics",
+    "topic": "Microwave Engineering",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "In a reflex Klystron oscillator",
+    "options": {
+      "A": "the maximum possible efficiency is 58%",
+      "B": "the frequency of oscillation varies linearly with the reflector voltage",
+      "C": "the power output varies continuously with reflector voltage",
+      "D": "the power output is maximum at fixed frequency"
+    },
+    "answer": "D",
+    "explanation": "In a reflex klystron, maximum power output occurs at discrete electronic modes where the transit time matches optimum bunching conditions, corresponding to fixed center frequencies of the modes.",
+    "source": "GATE ECE 1991",
+    "source_page": 8
+  },
+  {
+    "id": "GATE-1991-EC-1.37",
+    "year": 1991,
+    "subject": "Electromagnetics",
+    "topic": "Transmission Lines",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The input impedance of a short-circuited lossless transmission line of quarter wave length is",
+    "options": {
+      "A": "purely reactive",
+      "B": "purely resistive",
+      "C": "infinite",
+      "D": "dependent on the characteristic impedance of the line."
+    },
+    "answer": "C",
+    "explanation": "Input impedance of a short-circuited lossless line is Z_in = j Z_0 tan(βl). For a quarter wavelength line (l = λ/4), βl = (2π/λ)(λ/4) = π/2, so tan(π/2) = ∞, making Z_in infinite (behaves as an open circuit).",
+    "source": "GATE ECE 1991",
+    "source_page": 9
+  },
+  {
+    "id": "GATE-1991-EC-1.38",
+    "year": 1991,
+    "subject": "Electromagnetics",
+    "topic": "Electromagnetic Waves",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The electric field component of a uniform plane electromagnetic wave propagating in the Y-direction in a lossless medium will satisfy the equation:",
+    "options": {
+      "A": "∂²E_y / ∂y² = μϵ ∂²E_y / ∂t²",
+      "B": "∂²E_y / ∂x² = μϵ ∂²E_y / ∂t²",
+      "C": "∂²E_x / ∂y² = μϵ ∂²E_x / ∂t²",
+      "D": "√(E_x² + E_z²) / √(H_x² + H_z²) = √(μ/ϵ)"
+    },
+    "answer": "C",
+    "explanation": "For a wave propagating in the +y direction, the electric field components must be transverse to propagation (E_y = 0), so E consists of E_x and/or E_z. The 1D wave equation for E_x propagating in the y-direction is ∂²E_x / ∂y² = μϵ ∂²E_x / ∂t².",
+    "source": "GATE ECE 1991",
+    "source_page": 9
+  },
+  {
+    "id": "GATE-1991-EC-1.39",
+    "year": 1991,
+    "subject": "Electromagnetics",
+    "topic": "Wave Propagation",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A radio wave is incident on a layer of ionosphere at an angle of 30 degree with the vertical. If the critical frequency is 1.2 MHz, the maximum usable frequency (MUF) is",
+    "options": {
+      "A": "1.2 MHz",
+      "B": "2.4 MHz",
+      "C": "0.6 MHz",
+      "D": "1.386 MHz"
+    },
+    "answer": "D",
+    "explanation": "MUF = f_c sec(θ) where θ = 30°. MUF = 1.2 MHz / cos(30°) = 1.2 / 0.8660 = 1.3856 MHz ≈ 1.386 MHz.",
+    "source": "GATE ECE 1991",
+    "source_page": 9
+  },
+  {
+    "id": "GATE-1991-EC-1.40",
+    "year": 1991,
+    "subject": "Electromagnetics",
+    "topic": "Antenna Arrays",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "In a broadside array of 20 isotropic radiators, equally spaced at a distance of λ/2, the beam width between first nulls (BWFN) is",
+    "options": {
+      "A": "51.3 degrees",
+      "B": "11.46 degrees",
+      "C": "22.9 degrees",
+      "D": "102.6 degrees"
+    },
+    "answer": "B",
+    "explanation": "For a broadside array, BWFN = 2λ / (N d) radians = 2λ / (20 * λ/2) = 2 / 10 = 0.2 radians. In degrees, 0.2 * (180 / π) ≈ 11.46°.",
+    "source": "GATE ECE 1991",
+    "source_page": 9
+  }
+]
