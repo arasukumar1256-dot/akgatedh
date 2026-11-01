@@ -1,0 +1,78 @@
+[
+  {
+    "id": "GATE-1993-EC-6.1",
+    "year": 1993,
+    "subject": "Network Theory",
+    "topic": "Network Fundamentals",
+    "type": "MCQ",
+    "marks": 2,
+    "question": "A network contains linear resistors and ideal voltage sources. If values of all the resistors are doubled, then the voltage across each resistor is",
+    "options": {
+      "A": "halved",
+      "B": "doubled",
+      "C": "increased by four times",
+      "D": "not changed"
+    },
+    "answer": "D",
+    "explanation": "When all resistances in a circuit containing linear resistors and ideal voltage sources are scaled by a factor (doubled), the loop currents are halved, but the voltage across any resistor (V = I * 2R) remains unchanged because the current reduction factor cancels out the resistance scaling factor[cite: 25].",
+    "source": "GATE ECE 1993",
+    "source_page": 24
+  },
+  {
+    "id": "GATE-1993-EC-6.5",
+    "year": 1993,
+    "subject": "Control Systems",
+    "topic": "Stability Analysis",
+    "type": "MCQ",
+    "marks": 2,
+    "question": "If s³ + 3s² + 4s + A = 0, then all the roots of this equation are in the left half plane provided that",
+    "options": {
+      "A": "A > 12",
+      "B": "-3 < A < 4",
+      "C": "0 < A < 12",
+      "D": "5 < A < 12"
+    },
+    "answer": "C",
+    "explanation": "Using the Routh-Hurwitz criterion for s³ + 3s² + 4s + A = 0, the Routh array gives coefficients: s³: 1, 4; s²: 3, A; s¹: (12 - A)/3; s⁰: A. For stability, all elements in the first column must be positive, which yields A > 0 and 12 - A > 0, leading to 0 < A < 12[cite: 25].",
+    "source": "GATE ECE 1993",
+    "source_page": 24
+  },
+  {
+    "id": "GATE-1993-EC-6.23",
+    "year": 1993,
+    "subject": "Electromagnetics",
+    "topic": "Wave Propagation",
+    "type": "MCQ",
+    "marks": 2,
+    "question": "A material is described by the following electrical parameters at a frequency of 10 GHz: σ = 10⁶ mho/m, μ = μ₀, and ε / ε₀ = 10. The material at this frequency is considered to be",
+    "options": {
+      "A": "a good conductor",
+      "B": "a good dielectric",
+      "C": "neither a good conductor, nor a good dielectric",
+      "D": "a good magnetic material"
+    },
+    "answer": "A",
+    "explanation": "To classify the material, we compare the conduction current density to the displacement current density via the loss tangent tan δ = σ / (ωε). At 10 GHz with σ = 10⁶ mho/m, conduction current vastly exceeds displacement current, classifying it as a good conductor[cite: 25].",
+    "source": "GATE ECE 1993",
+    "source_page": 25
+  },
+  {
+    "id": "GATE-1993-EC-6.24",
+    "year": 1993,
+    "subject": "Electromagnetics",
+    "topic": "Transmission Lines",
+    "type": "MCQ",
+    "marks": 2,
+    "question": "Consider a transmission line of characteristic impedance of 50 ohms. Let it be terminated at one end by +j50 ohms. The VSWR produced by it in the transmission line will be",
+    "options": {
+      "A": "+1",
+      "B": "0",
+      "C": "∞",
+      "D": "+j"
+    },
+    "answer": "C",
+    "explanation": "The reflection coefficient magnitude |Γ| for a lossless transmission line terminated in a pure reactance (Z_L = j50 ohms) is 1. The Voltage Standing Wave Ratio (VSWR) is given by (1 + |Γ|) / (1 - |Γ|) = (1 + 1) / (1 - 1) = ∞[cite: 25].",
+    "source": "GATE ECE 1993",
+    "source_page": 25
+  }
+]
