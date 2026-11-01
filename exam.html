@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GATE ECE | Mock Examination</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.exam-header {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;flex-wrap:wrap;margin-bottom:18px
+}
+.exam-layout {
+  display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px
+}
+.timer {
+  font-size:25px;font-weight:bold;color:var(--accent)
+}
+.palette {
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:15px
+}
+.palette button {
+  min-height:40px;border:1px solid var(--border);
+  background:var(--panel2);color:var(--text);border-radius:7px
+}
+.palette button.current {outline:2px solid var(--accent)}
+.palette button.answered {background:#15803d;color:white}
+.palette button.review {background:#a16207;color:white}
+.palette button.answered-review {background:#7e22ce;color:white}
+.exam-option {
+  display:flex;gap:10px;padding:13px;margin:10px 0;
+  border:1px solid var(--border);border-radius:8px;cursor:pointer
+}
+.exam-option input {margin-top:5px}
+.exam-actions {display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.exam-actions button {flex:1}
+.question-title {font-size:19px;line-height:1.7;margin:20px 0}
+.legend {font-size:12px;color:var(--muted);line-height:2}
+.legend span {display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}
+@media(max-width:800px) {
+  .exam-layout {grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<main class="main-content container">
+  <div class="exam-header">
+    <div>
+      <h1 class="page-title">GATE ECE Mock Examination</h1>
+      <p class="page-description">180-minute practice examination</p>
+    </div>
+    <div class="timer" id="timer">03:00:00</div>
+  </div>
+
+  <section class="card" id="startPanel">
+    <h2>Examination Instructions</h2>
+    <p class="mt-1">Duration: 180 minutes</p>
+    <p>Questions are loaded from your verified JSON question files.</p>
+    <p>MCQ negative marking: 1/3 for 1-mark and 2/3 for 2-mark questions.</p>
+    <p>MSQ and NAT: no negative marking. MSQ has no partial marks.</p>
+    <p class="muted mt-1">This is a practice simulation. It does not reproduce every feature of the official GATE examination interface.</p>
+    <button class="btn btn-primary mt-2" onclick="startExam()">Start Examination</button>
+  </section>
+
+  <section id="examPanel" style="display:none">
+    <div class="exam-layout">
+      <div class="card">
+        <div class="question-top">
+          <div>
+            <span class="tag" id="qType">MCQ</span>
+            <span class="tag" id="qMarks">1 Mark</span>
+          </div>
+          <span class="muted" id="qPosition"></span>
+        </div>
+
+        <h2 class="question-title" id="qText"></h2>
+        <div id="qOptions"></div>
+
+        <div class="exam-actions">
+          <button class="btn" onclick="previousQ()">Previous</button>
+          <button class="btn" onclick="markReview()">Mark for Review</button>
+          <button class="btn btn-primary" onclick="saveNext()">Save & Next</button>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3>Question Palette</h3>
+        <p class="muted mt-1" id="candidateInfo">GATE ECE Practice</p>
+        <div class="palette" id="palette"></div>
+        <div class="legend mt-2">
+          <div><span style="background:#15803d"></span>Answered</div>
+          <div><span style="background:#a16207"></span>Marked for review</div>
+          <div><span style="background:#7e22ce"></span>Answered & marked</div>
+          <div><span style="background:var(--panel2);border:1px solid var(--border)"></span>Not answered</div>
+        </div>
+        <button class="btn btn-danger mt-2" style="width:100%" onclick="finishExam(false)">Submit Exam</button>
+      </aside>
+    </div>
+  </section>
+
+  <section class="card mt-2" id="noQuestions" style="display:none">
+    <h2>No examination questions available</h2>
+    <p>Add verified questions to your questions/JSON files first.</p>
+    <a href="practice.html" class="btn btn-primary mt-2">Go to Practice</a>
+  </section>
+</main>
+
+<script>
+const FIRST_YEAR = 1991;
+const LAST_YEAR = 2026;
+const DURATION = 180 * 60;
+
+let questions = [];
+let answers = {};
+let reviewSet = new Set();
+let current = 0;
+let remaining = DURATION;
+let timerInterval = null;
+let started = false;
+
+async function loadExamQuestions() {
+  const files = await Promise.all(
+    Array.from({length: LAST_YEAR-FIRST_YEAR+1},(_,i)=>FIRST_YEAR+i)
+      .map(async year=>{
+        try {
+          const r=await fetch(`questions/${year}.json`);
+          if(!r.ok)return [];
+          const d=await r.json();
+          return (Array.isArray(d)?d:d.questions||[]).filter(q=>
+            q.id!==undefined && q.question && q.answer!==undefined
+          );
+        } catch { return []; }
+      })
+  );
+  questions=files.flat();
+  document.getElementById("noQuestions").style.display =
+    questions.length ? "none" : "block";
+}
+
+function startExam() {
+  if(!questions.length) {
+    alert("No questions found. Add question JSON files first.");
+    return;
+  }
+  if(!confirm(`Start exam with ${questions.length} questions and 180 minutes?`))return;
+
+  started=true;
+  document.getElementById("startPanel").style.display="none";
+  document.getElementById("examPanel").style.display="block";
+  renderQuestion();
+  renderPalette();
+  timerInterval=setInterval(()=>{
+    remaining--;
+    updateTimer();
+    if(remaining<=0)finishExam(true);
+  },1000);
+}
+
+function updateTimer() {
+  const h=Math.floor(remaining/3600);
+  const m=Math.floor((remaining%3600)/60);
+  const s=remaining%60;
+  document.getElementById("timer").textContent =
+    [h,m,s].map(x=>String(x).padStart(2,"0")).join(":");
+}
+
+function renderQuestion() {
+  const q=questions[current];
+  document.getElementById("qType").textContent=q.type;
+  document.getElementById("qMarks").textContent=(q.marks||1)+" Mark(s)";
+  document.getElementById("qPosition").textContent=
+    `Question ${current+1} of ${questions.length}`;
+  document.getElementById("qText").textContent=q.question;
+
+  const area=document.getElementById("qOptions");
+  area.innerHTML="";
+
+  if(q.type==="MCQ" || q.type==="MSQ") {
+    Object.entries(q.options||{}).forEach(([key,value])=>{
+      const label=document.createElement("label");
+      label.className="exam-option";
+      const input=document.createElement("input");
+      input.type=q.type==="MSQ"?"checkbox":"radio";
+      input.name="examAnswer";
+      input.value=key;
+      const existing=answers[q.id];
+      input.checked=q.type==="MSQ"
+        ? Array.isArray(existing)&&existing.includes(key)
+        : existing===key;
+      input.addEventListener("change",captureAnswer);
+      const span=document.createElement("span");
+      span.textContent=key+". "+value;
+      label.append(input,span);
+      area.appendChild(label);
+    });
+  } else if(q.type==="NAT") {
+    const input=document.createElement("input");
+    input.type="number";
+    input.step="any";
+    input.className="form-control";
+    input.placeholder="Enter numerical answer";
+    input.value=answers[q.id]??"";
+    input.addEventListener("input",captureAnswer);
+    area.appendChild(input);
+  } else {
+    area.textContent="Unsupported question type.";
+  }
+  renderPalette();
+}
+
+function captureAnswer() {
+  const q=questions[current];
+  if(q.type==="MSQ") {
+    answers[q.id]=[...document.querySelectorAll('input[name="examAnswer"]:checked')]
+      .map(x=>x.value).sort();
+  } else if(q.type==="MCQ") {
+    const selected=document.querySelector('input[name="examAnswer"]:checked');
+    answers[q.id]=selected?selected.value:null;
+  } else {
+    answers[q.id]=document.querySelector("#qOptions input").value.trim();
+  }
+  renderPalette();
+}
+
+function hasAnswer(q) {
+  const a=answers[q.id];
+  return Array.isArray(a)?a.length>0:a!==undefined&&a!==null&&a!=="";
+}
+
+function renderPalette() {
+  const palette=document.getElementById("palette");
+  palette.innerHTML="";
+  questions.forEach((q,i)=>{
+    const b=document.createElement("button");
+    b.textContent=i+1;
+    if(i===current)b.classList.add("current");
+    const answered=hasAnswer(q);
+    const review=reviewSet.has(q.id);
+    if(answered&&review)b.classList.add("answered-review");
+    else if(answered)b.classList.add("answered");
+    else if(review)b.classList.add("review");
+    b.addEventListener("click",()=>{
+      captureAnswer();
+      current=i;
+      renderQuestion();
+    });
+    palette.appendChild(b);
+  });
+}
+
+function previousQ() {
+  captureAnswer();
+  if(current>0){current--;renderQuestion();}
+}
+
+function saveNext() {
+  captureAnswer();
+  if(current<questions.length-1){current++;renderQuestion();}
+  else alert("Last question. Submit when ready.");
+}
+
+function markReview() {
+  captureAnswer();
+  const id=questions[current].id;
+  if(reviewSet.has(id))reviewSet.delete(id);
+  else reviewSet.add(id);
+  if(current<questions.length-1)current++;
+  renderQuestion();
+}
+
+function correctAnswer(q,user) {
+  if(user===undefined||user===null||user==="")return false;
+  if(q.type==="MCQ")return String(user).toUpperCase()===String(q.answer).toUpperCase();
+  if(q.type==="MSQ")return JSON.stringify([...(user||[])].sort())===JSON.stringify([...(q.answer||[])].sort());
+  if(q.type==="NAT") {
+    const tolerance=Number(q.tolerance??0.000001);
+    return Number.isFinite(Number(user))&&Math.abs(Number(user)-Number(q.answer))<=tolerance;
+  }
+  return false;
+}
+
+function calculateMarks(q,user) {
+  const marks=Number(q.marks||1);
+  if(!hasValue(user))return 0;
+  if(correctAnswer(q,user))return marks;
+  if(q.type==="MCQ")return marks===1?-1/3:marks===2?-2/3:0;
+  return 0;
+}
+
+function hasValue(a) {
+  return Array.isArray(a)?a.length>0:a!==undefined&&a!==null&&a!=="";
+}
+
+function finishExam(auto) {
+  if(!started)return;
+  if(!auto&&!confirm("Are you sure you want to submit the examination?"))return;
+  clearInterval(timerInterval);
+  captureAnswer();
+
+  let score=0,correct=0,wrong=0,unattempted=0;
+  const review=questions.map(q=>{
+    const user=answers[q.id]??null;
+    const attempted=hasValue(user);
+    const isRight=attempted&&correctAnswer(q,user);
+    const marks=calculateMarks(q,user);
+    score+=marks;
+    if(!attempted)unattempted++;
+    else if(isRight)correct++;
+    else wrong++;
+    return {
+      ...q,
+      userAnswer:user,
+      isCorrect:isRight,
+      attempted,
+      awardedMarks:marks,
+      markedForReview:reviewSet.has(q.id)
+    };
+  });
+
+  const result={
+    date:new Date().toISOString(),
+    duration:DURATION-remaining,
+    totalQuestions:questions.length,
+    score:Number(score.toFixed(2)),
+    correct,wrong,unattempted,
+    questions:review
+  };
+
+  localStorage.setItem("gateLastResult",JSON.stringify(result));
+
+  const old=JSON.parse(localStorage.getItem("gateExamHistory")||"[]");
+  old.push({
+    date:result.date,
+    score:result.score,
+    correct,wrong,unattempted,
+    totalQuestions:questions.length
+  });
+  localStorage.setItem("gateExamHistory",JSON.stringify(old));
+
+  const attemptedIds=JSON.parse(localStorage.getItem("gateAttemptedIds")||"[]");
+  const correctIds=JSON.parse(localStorage.getItem("gateCorrectIds")||"[]");
+  const wrongList=JSON.parse(localStorage.getItem("gateWrongQuestions")||"[]");
+
+  review.forEach(q=>{
+    const id=String(q.id);
+    if(q.attempted&&!attemptedIds.includes(id))attemptedIds.push(id);
+    const filtered=correctIds.filter(x=>String(x)!==id);
+    if(q.isCorrect)filtered.push(id);
+    correctIds.length=0;correctIds.push(...filtered);
+
+    const filteredWrong=wrongList.filter(x=>String(x.id)!==id);
+    if(q.attempted&&!q.isCorrect)filteredWrong.push({...q});
+    wrongList.length=0;wrongList.push(...filteredWrong);
+  });
+
+  localStorage.setItem("gateAttemptedIds",JSON.stringify(attemptedIds));
+  localStorage.setItem("gateCorrectIds",JSON.stringify(correctIds));
+  localStorage.setItem("gateWrongQuestions",JSON.stringify(wrongList));
+
+  window.location.href="result.html";
+}
+
+loadExamQuestions();
+updateTimer();
+</script>
+</body>
+</html>
