@@ -1,0 +1,306 @@
+[
+  {
+    "id": "GATE-1994-EC-1.1",
+    "year": 1994,
+    "subject": "Signals & Systems",
+    "topic": "Laplace Transform",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The Laplace transform of a unit ramp function starting at t = a, is",
+    "options": {
+      "A": "1 / (s + a)²",
+      "B": "exp(-as) / (s + a)²",
+      "C": "exp(-as) / s²",
+      "D": "a / s²"
+    },
+    "answer": "C",
+    "explanation": "The unit ramp function starting at t = a is represented as (t - a)u(t - a). Using the time-shifting property of the Laplace transform, L{(t - a)u(t - a)} = exp(-as) / s².",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.2",
+    "year": 1994,
+    "subject": "Signals & Systems",
+    "topic": "Fourier Series",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The Fourier Series of an odd periodic function contains only",
+    "options": {
+      "A": "odd harmonics",
+      "B": "even harmonics",
+      "C": "cosine terms",
+      "D": "sine terms"
+    },
+    "answer": "D",
+    "explanation": "An odd function exhibits anti-symmetry (f(-t) = -f(t)). When expanded in a trigonometric Fourier series, all cosine terms (even components) evaluate to zero, leaving only the sine terms.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.3",
+    "year": 1994,
+    "subject": "Network Theory",
+    "topic": "AC Circuits & Resonance",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A series LCR circuit consisting of R = 10 Ω, |X_L| = 20 Ω and |X_C| = 20 Ω, is connected across an a.c. supply of 200 V rms. The rms voltage across the capacitor is",
+    "options": {
+      "A": "200 ∠ -90° V",
+      "B": "200 ∠ +90° V",
+      "C": "400 ∠ -90° V",
+      "D": "400 ∠ -90° V"
+    },
+    "answer": "D",
+    "explanation": "The circuit is at series resonance since X_L = X_C = 20 Ω. The current I = V / R = 200 / 10 = 20 A. The voltage across the capacitor is V_C = I * (-j X_C) = 20 * (-j 20) = -j 400 = 400 ∠ -90° V[cite: 29].",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.4",
+    "year": 1994,
+    "subject": "Network Theory",
+    "topic": "Transient Analysis",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A ramp voltage, v(t) = 100t volts, is applied to an RC differentiating circuit with R = 5 kΩ and C = 4 µF. The maximum output voltage is",
+    "options": {
+      "A": "0.2 volts",
+      "B": "2.0 volts",
+      "C": "10.0 volts",
+      "D": "50.0 volts"
+    },
+    "answer": "B",
+    "explanation": "For an RC differentiator, time constant RC = (5 × 10³ Ω) * (4 × 10⁻⁶ F) = 0.02 s. The output voltage is v_o(t) = RC (dv_i / dt) = 0.02 * 100 = 2.0 V[cite: 29].",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.6",
+    "year": 1994,
+    "subject": "Control Systems",
+    "topic": "Root Locus",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "If the open-loop transfer function is a ratio of a numerator polynomial of degree 'm' and a denominator polynomial of degree 'n', then the integer (n - m) represents the number of",
+    "options": {
+      "A": "breakaway points",
+      "B": "unstable poles",
+      "C": "separate root loci",
+      "D": "asymptotes"
+    },
+    "answer": "D",
+    "explanation": "In root locus construction, the number of asymptotes departing to infinity is given by the difference between the number of poles (n) and the number of zeros (m), which is n - m.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.7",
+    "year": 1994,
+    "subject": "Electronic Devices",
+    "topic": "Semiconductor Physics",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A small concentration of minority carriers is injected into a homogeneous semiconductor crystal at one point. An electric field of 10 V/cm is applied across the crystal and this moves the minority carriers a distance of 1 cm in 20 µsec. The mobility (in cm²/volt·sec) will be",
+    "options": {
+      "A": "1,000",
+      "B": "2,000",
+      "C": "5,000",
+      "D": "500,000"
+    },
+    "answer": "C",
+    "explanation": "Drift velocity v_d = distance / time = 1 cm / (20 × 10⁻⁶ s) = 5 × 10⁴ cm/s. Mobility µ = v_d / E = (5 × 10⁴ cm/s) / (10 V/cm) = 5,000 cm²/(V·s).",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.8",
+    "year": 1994,
+    "subject": "Electronic Devices",
+    "topic": "MOSFETs",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The threshold voltage of an n-channel MOSFET can be increased by",
+    "options": {
+      "A": "increasing the channel dopant concentration",
+      "B": "reducing the channel dopant concentration",
+      "C": "reducing the gate-oxide thickness",
+      "D": "reducing the channel length"
+    },
+    "answer": "A",
+    "explanation": "The threshold voltage of a MOSFET is directly proportional to the square root of the channel substrate doping concentration. Increasing the channel dopant concentration increases the threshold voltage.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.9",
+    "year": 1994,
+    "subject": "Analog Circuits",
+    "topic": "Power Amplifiers",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A class-A transformer coupled, transistor power amplifier is required to deliver a power output of 10 watts. The maximum power rating of the transistor should not be less than",
+    "options": {
+      "A": "5 W",
+      "B": "10 W",
+      "C": "20 W",
+      "D": "40 W"
+    },
+    "answer": "C",
+    "explanation": "In a class-A transformer-coupled amplifier, the maximum collector dissipation occurs under quiescent (no signal) conditions, which is equal to twice the maximum ac power output delivered to the load. For a 10 W output, the transistor power rating must be at least 20 W.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.11",
+    "year": 1994,
+    "subject": "Digital Circuits",
+    "topic": "Logic Gates",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "The output of a logic gate is '1' when all its inputs are at logic '0'. Then gate is either",
+    "options": {
+      "A": "a NAND or an EX-OR gate",
+      "B": "a NOR or an EX-NOR gate",
+      "C": "an OR or an EX-NOR gate",
+      "D": "an AND or an EX-OR gate"
+    },
+    "answer": "B",
+    "explanation": "A NOR gate outputs '1' only when all inputs are '0' (since NOT(0 + 0) = 1). An EX-NOR gate outputs '1' when an even number of inputs are '0', including the all-zero input case.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.12",
+    "year": 1994,
+    "subject": "Digital Circuits",
+    "topic": "Combinational Circuits",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A PLA can be used",
+    "options": {
+      "A": "as a microprocessor",
+      "B": "as a dynamic memory",
+      "C": "to realise a sequential logic",
+      "D": "to realise a combinational logic"
+    },
+    "answer": "D",
+    "explanation": "A Programmable Logic Array (PLA) contains programmable AND and OR arrays primarily utilized to implement complex combinational logic functions in sum-of-products form.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.13",
+    "year": 1994,
+    "subject": "Digital Circuits",
+    "topic": "Memory Systems",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A dynamic RAM consists of",
+    "options": {
+      "A": "6 transistors",
+      "B": "2 transistors and 2 capacitors",
+      "C": "1 transistor and 1 capacitor",
+      "D": "2 capacitors only"
+    },
+    "answer": "C",
+    "explanation": "A standard dynamic RAM (DRAM) memory cell uses a single MOSFET transistor combined with a storage capacitor (1T-1C cell) to store each bit of data.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.14",
+    "year": 1994,
+    "subject": "Communications",
+    "topic": "Angle Modulation",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "v(t) = 5[cos(10⁶πt) - sin(10³πt) sin(10⁶πt)] represents",
+    "options": {
+      "A": "DSB suppressed carrier signal",
+      "B": "AM signal",
+      "C": "SSB upper sideband signal",
+      "D": "Narrow band FM signal"
+    },
+    "answer": "D",
+    "explanation": "Using trigonometric identities, v(t) = 5 cos(10⁶πt) + 2.5[cos((10⁶ + 10³)πt) - cos((10⁶ - 10³)πt)], which corresponds to the standard expression for a narrow band frequency modulation (NBFM) signal.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.15",
+    "year": 1994,
+    "subject": "Communications",
+    "topic": "Sampling & Pulse Modulation",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "Increased pulse-width in the flat-top sampling, leads to",
+    "options": {
+      "A": "attenuation of high frequencies in reproduction",
+      "B": "attenuation of low frequencies in reproduction",
+      "C": "greater aliasing errors in reproduction",
+      "D": "no harmful effects in reproduction"
+    },
+    "answer": "A",
+    "explanation": "Flat-top sampling introduces an aperture effect which acts as a low-pass filter (sinc function envelope). Increasing the pulse width accentuates high-frequency attenuation during signal reconstruction.",
+    "source": "GATE ECE 1994",
+    "source_page": 26
+  },
+  {
+    "id": "GATE-1994-EC-1.16",
+    "year": 1994,
+    "subject": "Communications",
+    "topic": "Wave Propagation",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "Medium wave radio signals may be received at far off distances at night because",
+    "options": {
+      "A": "radio waves travel faster at night",
+      "B": "ground wave attenuation is low at night",
+      "C": "the sky wave is stronger at night",
+      "D": "there is no fading at night"
+    },
+    "answer": "C",
+    "explanation": "During the day, the D-layer of the ionosphere absorbs medium waves. At night, the D-layer disappears, allowing sky waves to reflect efficiently from the E and F layers, enabling long-distance reception.",
+    "source": "GATE ECE 1994",
+    "source_page": 27
+  },
+  {
+    "id": "GATE-1994-EC-1.17",
+    "year": 1994,
+    "subject": "Communications",
+    "topic": "Wave Propagation",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "For a short wave radio link between two stations via the ionosphere, the ratio of the maximum usable frequency to the critical frequency",
+    "options": {
+      "A": "is always less than 1",
+      "B": "is always greater than 1",
+      "C": "may be less than or more than 1 depending on the distance between the two stations",
+      "D": "does not depend on the distance between the two stations"
+    },
+    "answer": "B",
+    "explanation": "The maximum usable frequency (MUF) is given by MUF = f_c sec(θ). Since sec(θ) ≥ 1 for any angle of incidence θ > 0°, the ratio MUF / f_c is always greater than 1.",
+    "source": "GATE ECE 1994",
+    "source_page": 27
+  },
+  {
+    "id": "GATE-1994-EC-1.18",
+    "year": 1994,
+    "subject": "Electromagnetics",
+    "topic": "Electromagnetic Waves",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A plane electromagnetic wave travelling along +z direction, has its electric field given by E_x = 2 cos(ωt) and E_y = 2 cos(ωt + 90°). The wave is",
+    "options": {
+      "A": "linearly polarised",
+      "B": "right circularly polarised",
+      "C": "left circularly polarised",
+      "D": "elliptically polarised"
+    },
+    "answer": "C",
+    "explanation": "The components are equal in magnitude (2 = 2) and have a phase difference of +90° (E_y leads E_x by 90°). For propagation along +z, this vector rotation represents left-hand circular polarization (LCP).",
+    "source": "GATE ECE 1994",
+    "source_page": 27
+  }
+]
