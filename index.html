@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>GATE ECE | Preparation Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root {
+      --bg: #101827;
+      --panel: #192438;
+      --panel2: #202e45;
+      --text: #f3f6fc;
+      --muted: #a6b2c5;
+      --accent: #60a5fa;
+      --border: #30415b;
+    }
+
+    body.light {
+      --bg: #f2f5fa;
+      --panel: #ffffff;
+      --panel2: #edf2f9;
+      --text: #172033;
+      --muted: #64748b;
+      --accent: #2563eb;
+      --border: #dce3ed;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    aside {
+      width: 245px;
+      padding: 24px 16px;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0 0 28px;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav a {
+      display: block;
+      padding: 12px;
+      margin: 5px 0;
+      border-radius: 8px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    nav a:hover, nav a.active {
+      background: var(--panel2);
+      color: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    h1 { font-size: 26px; margin: 0 0 8px; }
+    p { color: var(--muted); }
+
+    button {
+      border: 1px solid var(--border);
+      background: var(--panel2);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+      margin: 22px 0;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 19px;
+      border-radius: 12px;
+    }
+
+    .card small { color: var(--muted); }
+    .number {
+      font-size: 27px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .section-title {
+      margin: 30px 0 15px;
+      font-size: 19px;
+    }
+
+    .subjects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .subject {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      transition: .2s;
+    }
+
+    .subject:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .subject h3 { margin: 0 0 8px; font-size: 16px; }
+    .subject p { margin: 0; font-size: 13px; }
+
+    .progress {
+      height: 9px;
+      background: var(--panel2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress div {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .primary {
+      background: var(--accent);
+      color: #071426;
+      font-weight: bold;
+      border: none;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+    }
+
+    footer {
+      margin-top: 35px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 850px) {
+      aside { width: 190px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .subjects { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .layout { display: block; }
+      aside {
+        width: 100%;
+        padding: 14px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .logo { margin: 0 0 10px; }
+      nav {
+        display: flex;
+        overflow-x: auto;
+        gap: 5px;
+      }
+      nav a { white-space: nowrap; font-size: 13px; }
+      main { padding: 18px; }
+      .stats { gap: 9px; }
+      .card { padding: 14px; }
+      .number { font-size: 22px; }
+      .subjects { grid-template-columns: 1fr; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="layout">
+
+  <aside>
+    <div class="logo">GATE <span>ECE</span></div>
+
+    <nav>
+      <a class="active" href="index.html">🏠 Dashboard</a>
+      <a href="subjects.html">📚 Subjects</a>
+      <a href="practice.html">✍ Practice</a>
+      <a href="exam.html">⏱ Mock Exam</a>
+      <a href="bookmarks.html">🔖 Bookmarks</a>
+      <a href="wrong-questions.html">❌ Wrong Questions</a>
+      <a href="result.html">📊 Results</a>
+      <a href="review.html">📝 Review</a>
+      <a href="analytics.html">📈 Analytics</a>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <div>
+        <h1>GATE ECE Dashboard</h1>
+        <p>Your preparation journey starts here.</p>
+      </div>
+      <button id="themeButton" onclick="toggleTheme()">🌙 Theme</button>
+    </div>
+
+    <section class="stats">
+      <div class="card">
+        <small>Total Questions Available</small>
+        <div class="number" id="totalQuestions">0</div>
+      </div>
+      <div class="card">
+        <small>Questions Attempted</small>
+        <div class="number" id="attempted">0</div>
+      </div>
+      <div class="card">
+        <small>Correct Answers</small>
+        <div class="number" id="correct">0</div>
+      </div>
+      <div class="card">
+        <small>Accuracy</small>
+        <div class="number" id="accuracy">0%</div>
+      </div>
+    </section>
+
+    <h2 class="section-title">Continue Preparation</h2>
+    <div class="card">
+      <h3>GATE ECE Practice</h3>
+      <p>Practice previous-year questions and improve your performance.</p>
+      <div class="actions">
+        <a class="primary" href="practice.html">Start Practice</a>
+        <a class="primary" href="exam.html">Start Mock Exam</a>
+      </div>
+    </div>
+
+    <h2 class="section-title">ECE Subjects</h2>
+    <section class="subjects">
+      <a class="card subject" href="practice.html?subject=Engineering%20Mathematics">
+        <h3>01. Engineering Mathematics</h3>
+        <p>Linear Algebra, Calculus, Probability</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=Network%20Theory">
+        <h3>02. Network Theory</h3>
+        <p>Circuits, Theorems, Transients</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=Signals%20and%20Systems">
+        <h3>03. Signals and Systems</h3>
+        <p>Signals, Fourier, Laplace, Z-transform</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=Electronic%20Devices">
+        <h3>04. Electronic Devices</h3>
+        <p>Diodes, BJT, MOSFET</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=Analog%20Circuits">
+        <h3>05. Analog Circuits</h3>
+        <p>Amplifiers, Op-amps, Oscillators</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=Digital%20Circuits">
+        <h3>06. Digital Circuits</h3>
+        <p>Logic, Sequential Circuits, ADC</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=Control%20Systems">
+        <h3>07. Control Systems</h3>
+        <p>Stability, Root Locus, Bode Plot</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=Communications">
+        <h3>08. Communications</h3>
+        <p>AM, FM, Digital Communication</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=Electromagnetic%20Theory">
+        <h3>09. Electromagnetic Theory</h3>
+        <p>Fields, Waves, Transmission Lines</p>
+      </a>
+
+      <a class="card subject" href="practice.html?subject=General%20Aptitude">
+        <h3>10. General Aptitude</h3>
+        <p>Verbal and Numerical Ability</p>
+      </a>
+    </section>
+
+    <h2 class="section-title">Preparation Progress</h2>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;gap:10px">
+        <strong>Overall completion</strong>
+        <strong id="progressText">0%</strong>
+      </div>
+      <div class="progress">
+        <div id="progressBar"></div>
+      </div>
+      <p>Attempt questions regularly to build your progress.</p>
+    </div>
+
+    <footer>
+      GATE ECE Preparation Platform · Personal study project
+    </footer>
+  </main>
+</div>
+
+<script>
+  function getNumber(key) {
+    return Number(localStorage.getItem(key) || 0);
+  }
+
+  function updateDashboard() {
+    const total = getNumber("gateTotalQuestions");
+    const attempted = getNumber("gateAttempted");
+    const correct = getNumber("gateCorrect");
+
+    const accuracy = attempted > 0
+      ? Math.round((correct / attempted) * 100)
+      : 0;
+
+    const progress = total > 0
+      ? Math.min(100, Math.round((attempted / total) * 100))
+      : 0;
+
+    document.getElementById("totalQuestions").textContent = total;
+    document.getElementById("attempted").textContent = attempted;
+    document.getElementById("correct").textContent = correct;
+    document.getElementById("accuracy").textContent = accuracy + "%";
+    document.getElementById("progressText").textContent = progress + "%";
+    document.getElementById("progressBar").style.width = progress + "%";
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle("light");
+
+    const isLight = document.body.classList.contains("light");
+    localStorage.setItem("gateTheme", isLight ? "light" : "dark");
+    document.getElementById("themeButton").textContent =
+      isLight ? "☀️ Theme" : "🌙 Theme";
+  }
+
+  function loadTheme() {
+    const savedTheme = localStorage.getItem("gateTheme");
+
+    if (savedTheme === "light") {
+      document.body.classList.add("light");
+      document.getElementById("themeButton").textContent = "☀️ Theme";
+    }
+  }
+
+  loadTheme();
+  updateDashboard();
+</script>
+
+</body>
+</html>
