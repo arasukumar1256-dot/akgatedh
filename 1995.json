@@ -1,0 +1,59 @@
+[
+  {
+    "id": "GATE-1995-EC-1.1",
+    "year": 1995,
+    "subject": "Network Theory",
+    "topic": "Transient & Steady-State Analysis",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A DC voltage source is connected across a series R-L-C circuit. Under steady-state conditions, the applied DC voltage drops entirely across the",
+    "options": {
+      "A": "R only",
+      "B": "L only",
+      "C": "C only",
+      "D": "R and L combination"
+    },
+    "answer": "C",
+    "explanation": "Under steady-state conditions with a DC excitation, an inductor acts as a short circuit (zero voltage drop) and a capacitor acts as an open circuit (blocking current). Therefore, the entire DC voltage drops across the capacitor[cite: 30].",
+    "source": "GATE ECE 1995",
+    "source_page": 30
+  },
+  {
+    "id": "GATE-1995-EC-1.21",
+    "year": 1995,
+    "subject": "Electronic Devices",
+    "topic": "Semiconductor Physics",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "In a P type silicon sample, the hole concentration is 2.25 × 10¹⁵ /cm³. If the intrinsic carrier concentration is 1.5 × 10¹⁰ /cm³, the electron concentration is",
+    "options": {
+      "A": "zero",
+      "B": "10¹⁰ /cm³",
+      "C": "10⁵ /cm³",
+      "D": "1.5 × 10²⁵ /cm³"
+    },
+    "answer": "C",
+    "explanation": "According to the mass-action law n * p = n_i², the electron concentration is n = (1.5 × 10¹⁰)² / (2.25 × 10¹⁵) = (2.25 × 10²⁰) / (2.25 × 10¹⁵) = 10⁵ /cm³[cite: 31, 33].",
+    "source": "GATE ECE 1995",
+    "source_page": 31
+  },
+  {
+    "id": "GATE-1995-EC-1.22",
+    "year": 1995,
+    "subject": "Electronic Devices",
+    "topic": "Diodes",
+    "type": "MCQ",
+    "marks": 1,
+    "question": "A zener diode works on the principle of",
+    "options": {
+      "A": "tunneling of charge carriers across the junction",
+      "B": "thermionic emission",
+      "C": "diffusion of charge carriers across the junction",
+      "D": "hopping of charge carriers across the junction"
+    },
+    "answer": "A",
+    "explanation": "Zener breakdown relies on high electric fields across heavily doped p-n junctions, resulting in quantum mechanical tunneling of electrons from the valence band to the conduction band[cite: 31, 33].",
+    "source": "GATE ECE 1995",
+    "source_page": 31
+  }
+]
