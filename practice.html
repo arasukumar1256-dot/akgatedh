@@ -1,0 +1,856 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATE ECE | Practice Questions</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .practice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+
+    .question-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .question-text {
+      font-size: 18px;
+      line-height: 1.7;
+      margin: 20px 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .answer-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      background: var(--panel2);
+    }
+
+    .answer-option:hover {
+      border-color: var(--accent);
+    }
+
+    .answer-option input {
+      margin-top: 5px;
+      accent-color: var(--accent);
+    }
+
+    .answer-option.correct {
+      border-color: var(--success);
+      background: color-mix(in srgb, var(--success) 12%, var(--panel));
+    }
+
+    .answer-option.incorrect {
+      border-color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 10%, var(--panel));
+    }
+
+    .question-actions {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .question-actions div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 9px;
+      background: var(--panel2);
+      border: 1px solid var(--border);
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct {
+      border-color: var(--success);
+    }
+
+    .feedback.incorrect {
+      border-color: var(--danger);
+    }
+
+    .empty-state {
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    .empty-state h2 {
+      margin-bottom: 10px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .stats-row .card {
+      padding: 14px;
+    }
+
+    .stats-row strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media(max-width: 750px) {
+      .filters {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 450px) {
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .question-text {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+    <div class="logo">GATE <span>ECE</span></div>
+
+    <nav>
+      <a class="nav-link" href="index.html">🏠 Dashboard</a>
+      <a class="nav-link" href="subjects.html">📚 Subjects</a>
+      <a class="nav-link active" href="practice.html">✍ Practice</a>
+      <a class="nav-link" href="exam.html">⏱ Mock Exam</a>
+      <a class="nav-link" href="bookmarks.html">🔖 Bookmarks</a>
+      <a class="nav-link" href="wrong-questions.html">❌ Wrong Questions</a>
+      <a class="nav-link" href="result.html">📊 Results</a>
+      <a class="nav-link" href="review.html">📝 Review</a>
+      <a class="nav-link" href="analytics.html">📈 Analytics</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+    <div class="practice-header">
+      <div>
+        <h1 class="page-title">Question Practice</h1>
+        <p class="page-description">
+          Practice GATE ECE previous-year questions.
+        </p>
+      </div>
+
+      <button class="btn" onclick="toggleTheme()">🌙 Theme</button>
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="stats-row">
+      <div class="card">
+        <span class="muted">Available</span>
+        <strong id="availableCount">0</strong>
+      </div>
+
+      <div class="card">
+        <span class="muted">Attempted</span>
+        <strong id="attemptedCount">0</strong>
+      </div>
+
+      <div class="card">
+        <span class="muted">Correct</span>
+        <strong id="correctCount">0</strong>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+
+    <section class="card">
+
+      <h3 class="mb-1">Filter Questions</h3>
+
+      <div class="filters">
+
+        <div class="filter">
+          <label for="subjectFilter">Subject</label>
+          <select id="subjectFilter" class="form-control">
+            <option value="">All Subjects</option>
+            <option>Engineering Mathematics</option>
+            <option>Network Theory</option>
+            <option>Signals and Systems</option>
+            <option>Electronic Devices</option>
+            <option>Analog Circuits</option>
+            <option>Digital Circuits</option>
+            <option>Control Systems</option>
+            <option>Communications</option>
+            <option>Electromagnetic Theory</option>
+            <option>General Aptitude</option>
+          </select>
+        </div>
+
+        <div class="filter">
+          <label for="yearFilter">Year</label>
+          <select id="yearFilter" class="form-control">
+            <option value="">All Years</option>
+          </select>
+        </div>
+
+        <div class="filter">
+          <label for="typeFilter">Question Type</label>
+          <select id="typeFilter" class="form-control">
+            <option value="">All Types</option>
+            <option value="MCQ">MCQ</option>
+            <option value="MSQ">MSQ</option>
+            <option value="NAT">NAT</option>
+          </select>
+        </div>
+
+        <div class="filter">
+          <label for="topicFilter">Topic</label>
+          <select id="topicFilter" class="form-control">
+            <option value="">All Topics</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="applyFilters()">
+          Apply Filters
+        </button>
+
+        <button class="btn" onclick="resetFilters()">
+          Reset
+        </button>
+      </div>
+
+    </section>
+
+    <!-- QUESTION AREA -->
+
+    <section class="card mt-2" id="questionArea">
+
+      <div class="question-top">
+        <div>
+          <span class="tag" id="questionType">MCQ</span>
+          <span class="tag" id="questionMarks">1 Mark</span>
+        </div>
+
+        <button class="btn" id="bookmarkButton"
+          onclick="toggleBookmark()">
+          ☆ Bookmark
+        </button>
+      </div>
+
+      <div class="muted" id="questionInfo">
+        Question information
+      </div>
+
+      <h2 class="question-text" id="questionText">
+        Loading questions...
+      </h2>
+
+      <div id="answerArea"></div>
+
+      <div class="feedback" id="feedback">
+        <h3 id="feedbackTitle"></h3>
+        <p id="feedbackMessage"></p>
+        <p id="explanation" style="margin-top:10px"></p>
+      </div>
+
+      <div class="question-actions">
+
+        <div>
+          <button class="btn" onclick="previousQuestion()">
+            ← Previous
+          </button>
+
+          <button class="btn" onclick="nextQuestion()">
+            Next →
+          </button>
+        </div>
+
+        <div>
+          <button class="btn btn-primary" id="checkButton"
+            onclick="checkAnswer()">
+            Check Answer
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="empty-state card mt-2" id="emptyState"
+      style="display:none">
+
+      <h2>No Questions Found</h2>
+
+      <p class="muted">
+        No questions are available for these filters.
+        Add verified question data to your questions folder.
+      </p>
+
+    </div>
+
+    <p class="muted mt-2">
+      Note: Only questions added to your verified JSON database
+      will appear here. No historical questions are generated automatically.
+    </p>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/*
+  GATE ECE QUESTION DATABASE
+
+  Files expected:
+  questions/1991.json
+  questions/1992.json
+  ...
+  questions/2026.json
+
+  See the JSON format below this code.
+*/
+
+const FIRST_YEAR = 1991;
+const LAST_YEAR = 2026;
+
+let allQuestions = [];
+let filteredQuestions = [];
+let currentIndex = 0;
+let selectedAnswer = null;
+let answeredCurrent = false;
+
+/* LOCAL STORAGE HELPERS */
+
+function readStorage(key, fallback = []) {
+  try {
+    return JSON.parse(localStorage.getItem(key)) || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function questionId(q) {
+  return String(q.id);
+}
+
+/* LOAD QUESTION DATABASE */
+
+async function loadQuestions() {
+  const results = await Promise.all(
+    Array.from(
+      { length: LAST_YEAR - FIRST_YEAR + 1 },
+      (_, i) => FIRST_YEAR + i
+    ).map(async year => {
+      try {
+        const response = await fetch(`questions/${year}.json`);
+
+        if (!response.ok) return [];
+
+        const data = await response.json();
+
+        const list = Array.isArray(data)
+          ? data
+          : data.questions || [];
+
+        return list.map(q => ({
+          ...q,
+          year: Number(q.year || year)
+        }));
+
+      } catch (error) {
+        console.warn("Could not load year:", year);
+        return [];
+      }
+    })
+  );
+
+  allQuestions = results.flat().filter(q =>
+    q.id !== undefined &&
+    q.subject &&
+    q.topic &&
+    q.type &&
+    q.question !== undefined &&
+    q.answer !== undefined
+  );
+
+  allQuestions.sort((a, b) =>
+    Number(a.year) - Number(b.year)
+  );
+
+  document.getElementById("availableCount").textContent =
+    allQuestions.length;
+
+  updateStats();
+  populateTopics();
+
+  const params = new URLSearchParams(window.location.search);
+  const requestedSubject = params.get("subject");
+
+  if (requestedSubject) {
+    document.getElementById("subjectFilter").value =
+      requestedSubject;
+  }
+
+  applyFilters();
+}
+
+/* FILTERS */
+
+function populateTopics() {
+  const topicSelect = document.getElementById("topicFilter");
+
+  const topics = [...new Set(
+    allQuestions.map(q => q.topic).filter(Boolean)
+  )].sort();
+
+  topicSelect.innerHTML =
+    '<option value="">All Topics</option>';
+
+  topics.forEach(topic => {
+    const option = document.createElement("option");
+    option.value = topic;
+    option.textContent = topic;
+    topicSelect.appendChild(option);
+  });
+}
+
+function populateYears() {
+  const select = document.getElementById("yearFilter");
+
+  for (let year = LAST_YEAR; year >= FIRST_YEAR; year--) {
+    const option = document.createElement("option");
+    option.value = year;
+    option.textContent = year;
+    select.appendChild(option);
+  }
+}
+
+function applyFilters() {
+  const subject = document.getElementById("subjectFilter").value;
+  const year = document.getElementById("yearFilter").value;
+  const type = document.getElementById("typeFilter").value;
+  const topic = document.getElementById("topicFilter").value;
+
+  filteredQuestions = allQuestions.filter(q => {
+    return (
+      (!subject || q.subject === subject) &&
+      (!year || Number(q.year) === Number(year)) &&
+      (!type || q.type === type) &&
+      (!topic || q.topic === topic)
+    );
+  });
+
+  currentIndex = 0;
+  selectedAnswer = null;
+  answeredCurrent = false;
+
+  document.getElementById("availableCount").textContent =
+    filteredQuestions.length;
+
+  renderQuestion();
+}
+
+function resetFilters() {
+  document.getElementById("subjectFilter").value = "";
+  document.getElementById("yearFilter").value = "";
+  document.getElementById("typeFilter").value = "";
+  document.getElementById("topicFilter").value = "";
+
+  applyFilters();
+}
+
+/* DISPLAY QUESTION */
+
+function renderQuestion() {
+  const area = document.getElementById("questionArea");
+  const empty = document.getElementById("emptyState");
+
+  if (filteredQuestions.length === 0) {
+    area.style.display = "none";
+    empty.style.display = "block";
+    return;
+  }
+
+  area.style.display = "block";
+  empty.style.display = "none";
+
+  const q = filteredQuestions[currentIndex];
+
+  selectedAnswer = null;
+  answeredCurrent = false;
+
+  document.getElementById("questionType").textContent = q.type;
+  document.getElementById("questionMarks").textContent =
+    (q.marks || 1) + " Marks";
+
+  document.getElementById("questionInfo").textContent =
+    `${q.year} | ${q.subject} | ${q.topic} | Question ${currentIndex + 1} of ${filteredQuestions.length}`;
+
+  document.getElementById("questionText").textContent = q.question;
+
+  document.getElementById("feedback").className = "feedback";
+  document.getElementById("feedbackTitle").textContent = "";
+  document.getElementById("feedbackMessage").textContent = "";
+  document.getElementById("explanation").textContent = "";
+
+  document.getElementById("checkButton").disabled = false;
+
+  renderAnswerInput(q);
+  updateBookmarkButton();
+}
+
+/* ANSWER INPUT */
+
+function renderAnswerInput(q) {
+  const area = document.getElementById("answerArea");
+  area.innerHTML = "";
+
+  if (q.type === "MCQ" || q.type === "MSQ") {
+    const options = q.options || {};
+    const isMultiple = q.type === "MSQ";
+
+    Object.entries(options).forEach(([key, value]) => {
+      const label = document.createElement("label");
+      label.className = "answer-option";
+
+      const input = document.createElement("input");
+      input.type = isMultiple ? "checkbox" : "radio";
+      input.name = "answer";
+      input.value = key;
+
+      input.addEventListener("change", () => {
+        if (isMultiple) {
+          selectedAnswer = [
+            ...document.querySelectorAll(
+              'input[name="answer"]:checked'
+            )
+          ].map(el => el.value).sort();
+        } else {
+          selectedAnswer = input.value;
+        }
+      });
+
+      const text = document.createElement("span");
+      text.textContent = `${key}. ${value}`;
+
+      label.append(input, text);
+      area.appendChild(label);
+    });
+
+  } else if (q.type === "NAT") {
+    const label = document.createElement("label");
+    label.textContent = "Enter your numerical answer:";
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.step = "any";
+    input.className = "form-control mt-1";
+    input.placeholder = "Enter answer";
+
+    input.addEventListener("input", () => {
+      selectedAnswer = input.value.trim();
+    });
+
+    area.append(label, input);
+
+  } else {
+    area.textContent = "Unsupported question type.";
+  }
+}
+
+/* ANSWER VALIDATION */
+
+function normalizeArray(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map(String).sort();
+}
+
+function isCorrect(q, userAnswer) {
+  if (q.type === "MCQ") {
+    return String(userAnswer).toUpperCase() ===
+      String(q.answer).toUpperCase();
+  }
+
+  if (q.type === "MSQ") {
+    return JSON.stringify(normalizeArray(userAnswer)) ===
+      JSON.stringify(normalizeArray(q.answer));
+  }
+
+  if (q.type === "NAT") {
+    const actual = Number(q.answer);
+    const entered = Number(userAnswer);
+    const tolerance = Number(q.tolerance ?? 0.000001);
+
+    return Number.isFinite(entered) &&
+      Number.isFinite(actual) &&
+      Math.abs(actual - entered) <= tolerance;
+  }
+
+  return false;
+}
+
+/* CHECK ANSWER */
+
+function checkAnswer() {
+  if (answeredCurrent) return;
+
+  const q = filteredQuestions[currentIndex];
+
+  if (
+    selectedAnswer === null ||
+    selectedAnswer === "" ||
+    (Array.isArray(selectedAnswer) && selectedAnswer.length === 0)
+  ) {
+    alert("Please select or enter an answer.");
+    return;
+  }
+
+  const correct = isCorrect(q, selectedAnswer);
+  const id = questionId(q);
+
+  answeredCurrent = true;
+
+  const attempted = readStorage("gateAttemptedIds");
+  const correctIds = readStorage("gateCorrectIds");
+  const wrong = readStorage("gateWrongQuestions");
+
+  if (!attempted.includes(id)) {
+    attempted.push(id);
+  }
+
+  const updatedCorrect = correctIds.filter(x => x !== id);
+
+  if (correct) {
+    updatedCorrect.push(id);
+  }
+
+  const updatedWrong = wrong.filter(x => questionId(x) !== id);
+
+  if (!correct) {
+    updatedWrong.push({
+      ...q,
+      userAnswer: selectedAnswer
+    });
+  }
+
+  saveStorage("gateAttemptedIds", attempted);
+  saveStorage("gateCorrectIds", updatedCorrect);
+  saveStorage("gateWrongQuestions", updatedWrong);
+
+  showFeedback(q, correct);
+  updateStats();
+  updateOptionColors(q);
+}
+
+function showFeedback(q, correct) {
+  const feedback = document.getElementById("feedback");
+
+  feedback.className =
+    "feedback show " + (correct ? "correct" : "incorrect");
+
+  document.getElementById("feedbackTitle").textContent =
+    correct ? "✓ Correct Answer!" : "✗ Incorrect Answer";
+
+  document.getElementById("feedbackMessage").textContent =
+    "Correct answer: " +
+    (Array.isArray(q.answer) ? q.answer.join(", ") : q.answer);
+
+  document.getElementById("explanation").textContent =
+    q.explanation || "No explanation has been added for this question.";
+
+  document.getElementById("checkButton").disabled = true;
+}
+
+function updateOptionColors(q) {
+  if (q.type !== "MCQ" && q.type !== "MSQ") return;
+
+  document.querySelectorAll(".answer-option").forEach(label => {
+    const input = label.querySelector("input");
+    const key = input.value;
+
+    const correctAnswers = Array.isArray(q.answer)
+      ? q.answer.map(String)
+      : [String(q.answer)];
+
+    if (correctAnswers.includes(key)) {
+      label.classList.add("correct");
+    } else if (input.checked) {
+      label.classList.add("incorrect");
+    }
+  });
+}
+
+/* NAVIGATION */
+
+function nextQuestion() {
+  if (currentIndex < filteredQuestions.length - 1) {
+    currentIndex++;
+    renderQuestion();
+  } else {
+    alert("You have reached the last question.");
+  }
+}
+
+function previousQuestion() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderQuestion();
+  } else {
+    alert("This is the first question.");
+  }
+}
+
+/* BOOKMARKS */
+
+function toggleBookmark() {
+  const q = filteredQuestions[currentIndex];
+  if (!q) return;
+
+  let bookmarks = readStorage("gateBookmarks");
+  const id = questionId(q);
+
+  const exists = bookmarks.some(item =>
+    questionId(item) === id
+  );
+
+  if (exists) {
+    bookmarks = bookmarks.filter(item =>
+      questionId(item) !== id
+    );
+  } else {
+    bookmarks.push(q);
+  }
+
+  saveStorage("gateBookmarks", bookmarks);
+  updateBookmarkButton();
+}
+
+function updateBookmarkButton() {
+  const q = filteredQuestions[currentIndex];
+  if (!q) return;
+
+  const bookmarks = readStorage("gateBookmarks");
+
+  const exists = bookmarks.some(item =>
+    questionId(item) === questionId(q)
+  );
+
+  document.getElementById("bookmarkButton").textContent =
+    exists ? "★ Bookmarked" : "☆ Bookmark";
+}
+
+/* STATISTICS */
+
+function updateStats() {
+  const attempted = readStorage("gateAttemptedIds");
+  const correct = readStorage("gateCorrectIds");
+
+  document.getElementById("attemptedCount").textContent =
+    attempted.length;
+
+  document.getElementById("correctCount").textContent =
+    correct.length;
+
+  // Dashboard compatibility
+  localStorage.setItem("gateTotalQuestions", allQuestions.length);
+  localStorage.setItem("gateAttempted", attempted.length);
+  localStorage.setItem("gateCorrect", correct.length);
+}
+
+/* THEME */
+
+function toggleTheme() {
+  document.body.classList.toggle("light");
+
+  const theme = document.body.classList.contains("light")
+    ? "light"
+    : "dark";
+
+  localStorage.setItem("gateTheme", theme);
+}
+
+function loadTheme() {
+  if (localStorage.getItem("gateTheme") === "light") {
+    document.body.classList.add("light");
+  }
+}
+
+/* START */
+
+populateYears();
+loadTheme();
+loadQuestions();
+
+</script>
+
+</body>
+</html>
